@@ -5,6 +5,7 @@
 REPO="devops-static-web"
 
 USERID=$(id -u)
+
 #colores
 LRED='\033[1;31m'
 LGREEN='\033[1;32m'
@@ -31,26 +32,8 @@ else
         apt install git -y 
 fi
 
-###base de datos maria db ######
-if dpkg -s mariadb-server > /dev/null 2>&1; then
-    echo -e "\n${LBLUE}El servidor se encuentra Actualizado ...${NC}"
-else
-    echo -e "\n${LYELLOW}instalando MARIA DB ...${NC}"
-    apt install -y mariadb-server
-fi
-###Iniciando la base de datos
-    systemctl start mariadb
-    systemctl enable mariadb
 
-# echo -e "\n${LBLUE}Configurando base de datos ...${NC}"
-# ###Configuracion de la base de datos
-# mysql -e "
-# CREATE DATABASE ecomdb;
-# CREATE USER 'ecomuser'@'localhost' IDENTIFIED BY 'ecompassword';
-# GRANT ALL PRIVILEGES ON *.* TO 'ecomuser'@'localhost';
-# flush privileges;"
-
-###Instalación Apache ######
+#Instalación Apache 
 if dpkg -l |grep -q apache2 ;
 then
     echo "ya esta instalado"
